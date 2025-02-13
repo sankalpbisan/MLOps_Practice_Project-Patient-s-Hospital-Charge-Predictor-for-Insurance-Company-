@@ -1,5 +1,5 @@
-import sys
 from src.logger import logging
+import sys
 
 def error_message_detail(error,error_details:sys):
     '''
@@ -14,6 +14,8 @@ def error_message_detail(error,error_details:sys):
 
     #Formating the error message
     error_message=f"Error [{str(error)}] occurred on line number [{line_no}] in file [{file_name}]"
+
+    logging.info(error_message)
 
     return error_message
 

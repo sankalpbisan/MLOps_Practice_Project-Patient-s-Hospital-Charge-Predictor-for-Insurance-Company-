@@ -6,6 +6,7 @@ __pycache__/
 #Files added by me !!!!
 mlops_venv/
 temp.py
+.idea/
 
 # C extensions
 *.so
