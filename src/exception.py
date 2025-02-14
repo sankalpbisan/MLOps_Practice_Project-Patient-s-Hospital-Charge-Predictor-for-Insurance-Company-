@@ -13,7 +13,7 @@ def error_message_detail(error,error_details:sys):
     line_no = exec_tb.tb_lineno
 
     #Formating the error message
-    error_message=f"Error [{str(error)}] occurred on line number [{line_no}] in file [{file_name}]"
+    error_message = f"Error occurred in python script: [{file_name}] at line number [{line_no}]: {str(error)}"
 
     logging.info(error_message)
 
