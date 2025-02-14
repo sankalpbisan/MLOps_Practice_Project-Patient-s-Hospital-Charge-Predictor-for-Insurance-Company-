@@ -7,6 +7,8 @@ __pycache__/
 mlops_venv/
 temp.py
 .idea/
+catboost_info/
+
 
 # C extensions
 *.so
