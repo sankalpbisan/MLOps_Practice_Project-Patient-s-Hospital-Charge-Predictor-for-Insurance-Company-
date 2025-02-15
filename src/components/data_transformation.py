@@ -18,12 +18,18 @@ from src.utils import root_dir,save_object
 class DataTransformationConfig:
     transformer_obj_file_path = os.path.join(root_dir,'artifacts','transformer.pkl')
 
-
 class DataTransformation:
     def __init__(self):
+        '''
+        This function initializes the config files needed for DataTransformation
+        '''
         self.data_transformer_config = DataTransformationConfig()
 
     def get_transformer(self):
+        '''
+        This function create the Column Transformer object for numerical and categorical columns
+        Returns: Column Transformer Object
+        '''
         try:
             cat_cols = ['sex', 'smoker', 'region']
             num_cols = ['age',	'bmi',	'children']
@@ -57,6 +63,9 @@ class DataTransformation:
 
 
     def transform_data(self,train_data_path):
+        '''
+        This functoin
+        '''
         try:
             logging.info("Data Transformation begin...")
             target_col = "charges"
@@ -96,22 +105,3 @@ class DataTransformation:
 
         except Exception as e:
             raise CustomException(e,sys)
-
-
-
-
-'''
-try:
-    data_ingestion_obj = DataIngestion()
-    train,test = data_ingestion_obj.get_data()
-    logging.info("Data Ingestion completed successfully")
-except Exception as e:
-    raise CustomException(e,sys)
-
-print(train,"\n",test)
-
-
-class DataTransformationConfig:
-    def __init__(self):
-        pass
-'''

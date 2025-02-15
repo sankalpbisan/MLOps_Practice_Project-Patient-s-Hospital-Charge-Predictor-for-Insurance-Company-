@@ -1,9 +1,9 @@
 import streamlit as st
-from src.pipeline.predict_pipeline import CustomData,PredictionPipeline
+from src.pipeline.predict_pipeline import LoadData,PredictionPipeline
 from src.logger import logging
 
 # Title of the app
-st.title("Students' Performance Prediction")
+st.title("Patient's Hospital Charge Predictor")
 
 #'age', 'sex', 'bmi', 'children', 'smoker', 'region', 'charges'
 st.text("Enter the details below to predict performance")
@@ -16,34 +16,36 @@ smoker = st.text_input("Smoker")
 region = st.text_input("Region")
 
 
-logging.info(f"The values are:{age, sex, bmi, children, smoker, region}")
+logging.info(f"Entered values are:{age, sex, bmi, children, smoker, region}")
 print(age, sex, bmi, children, smoker, region)
 
-if age and sex and bmi and children and smoker and region:
 
-    input_data = CustomData(
-                     age=age.strip(),
+
+if age and sex and bmi and children and smoker and region:
+    input_data = LoadData(
+                     age=int(age.strip()),
                      sex=sex.strip(),
-                     bmi=bmi.strip(),
-                     children=children.strip(),
+                     bmi=float(bmi),
+                     children=int(children.strip()),
                      smoker=smoker.strip(),
-                     region=int(region),
-                     writing_score=int(writing_score)
+                     region=region.strip()
     )
 
     # input as dataframe
-    inp_df = input_data.get_data_as_dataframe()
+    inp_df = input_data.load_data()
 
     #Prediction
-    prediction = PredictionPipeline()
-    result = prediction.predict(features=inp_df)
+    prediction_obj = PredictionPipeline()
+    result = prediction_obj.predict(inp_df)
 
     # Button to trigger an action
     if st.button("Predict"):
         st.session_state.submitted = True
         st.success(f"Prediction is : {result[0]}")
+        logging.info(f"The predicted price is:{result[0]}")
     else:
         st.error("Something is Fishy !!!!")
 
 else:
     print("One or more inputs are empty. Please fill all fields.")
+

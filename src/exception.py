@@ -5,6 +5,7 @@ def error_message_detail(error,error_details:sys):
     '''
     This function returns the line no. and file_name where the error occurred.
     '''
+
     # Extracting error details from the sys module
     _,_,exec_tb=error_details.exc_info()
 
