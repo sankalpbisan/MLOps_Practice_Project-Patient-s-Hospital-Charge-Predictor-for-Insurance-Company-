@@ -15,8 +15,8 @@ class PredictionPipeline:
     def predict(self,feature):
         try:
             # logging.info("Prediction Initiated")
-            transformer = load_object(os.path.abspath('artifacts/transformer.pkl'))
-            model = load_object(os.path.abspath('artifacts/model.pkl'))
+            transformer = load_object('artifacts/transformer.pkl')
+            model = load_object('artifacts/model.pkl')
             raw_data = feature
             prep_data = transformer.transform(raw_data)
             pred = model.predict(prep_data)
