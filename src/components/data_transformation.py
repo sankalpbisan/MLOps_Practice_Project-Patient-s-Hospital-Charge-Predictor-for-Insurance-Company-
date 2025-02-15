@@ -2,17 +2,15 @@ import os
 import sys
 import numpy as np
 import pandas as pd
+from src.logger import logging
 from dataclasses import dataclass
 from sklearn.pipeline import Pipeline
+from src.exception import CustomException
+from src.utils import root_dir,save_object
 from sklearn.compose import ColumnTransformer
 from sklearn.model_selection import train_test_split
 from sklearn.preprocessing import StandardScaler, OneHotEncoder
 
-from src.logger import logging
-from src.exception import CustomException
-from src.utils import root_dir,save_object
-
-#from src.components.data_ingestion import DataIngestion
 
 @dataclass()
 class DataTransformationConfig:
@@ -64,7 +62,8 @@ class DataTransformation:
 
     def transform_data(self,train_data_path):
         '''
-        This functoin
+        This method is responsible for all the modifications that needs to be done to the dataset.
+        Returns: Preprocessed data for training and validation set and Data Transformer Object path
         '''
         try:
             logging.info("Data Transformation begin...")

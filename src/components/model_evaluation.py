@@ -1,22 +1,28 @@
 import os
 import sys
 import pandas as pd
-from sklearn.metrics import r2_score
-
 from src.logger import logging
-from src.exception import CustomException
-
-from src.components.model_training import ModelTrainer
 from src.utils import load_object
+from sklearn.metrics import r2_score
+from src.exception import CustomException
+from src.components.model_training import ModelTrainer
+
 
 class ModelEvaluation:
     def __init__(self):
+        '''
+        This method fetches the model, transformer and test data path
+        '''
         self.model_path = ModelTrainer().model_trainer()
         self.test_data_path = os.path.join(os.path.abspath('artifacts/test.csv'))
         self.transformer_path = os.path.join(os.path.abspath('artifacts/transformer.pkl'))
         logging.info("Fetched the test data, transformer and model path")
 
     def test_evaluation(self):
+        '''
+        This method performs Evaluation on test_data set
+        Returns: r2_score
+        '''
         try:
             logging.info("Evaluating the model on test set (kept aside from the start)")
 
@@ -40,7 +46,3 @@ class ModelEvaluation:
 
         except Exception as e:
             raise CustomException(e,sys)
-
-
-x = ModelEvaluation().test_evaluation()
-print(x)

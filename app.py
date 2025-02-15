@@ -42,9 +42,9 @@ if age and sex and bmi and children and smoker and region:
     if st.button("Predict"):
         st.session_state.submitted = True
         st.success(f"Prediction is : {result[0]}")
-        logging.info(f"The predicted price is:{result[0]}")
+        logging.info(f"Your estimated hospital charges :{result[0]}")
     else:
-        st.error("Something is Fishy !!!!")
+        st.error("Something went wrong !!!!")
 
 else:
     print("One or more inputs are empty. Please fill all fields.")

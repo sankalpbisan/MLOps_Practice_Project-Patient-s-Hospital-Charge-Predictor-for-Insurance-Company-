@@ -1,24 +1,20 @@
 import os
 import sys
-
+from src.logger import logging
 from xgboost import XGBRegressor
 from dataclasses import dataclass
 from sklearn.svm import LinearSVR
 from sklearn.metrics import r2_score
 from catboost import CatBoostRegressor
+from src.exception import CustomException
+from src.utils import root_dir, save_object
 from sklearn.linear_model import SGDRegressor
 from sklearn.tree import DecisionTreeRegressor
 from sklearn.model_selection import GridSearchCV
 from sklearn.neighbors import KNeighborsRegressor
 from sklearn.linear_model import LinearRegression
-from sklearn.ensemble import (AdaBoostRegressor, GradientBoostingRegressor, RandomForestRegressor)
-
-
-# from sklearn.model_selection import cross_val_score
-from src.utils import root_dir, save_object
-from src.logger import logging
-from src.exception import CustomException
 from src.components.data_transformation import DataTransformation
+from sklearn.ensemble import (AdaBoostRegressor, GradientBoostingRegressor, RandomForestRegressor)
 
 
 @dataclass
@@ -27,9 +23,16 @@ class ModelTrainerConfig:
 
 class ModelTrainer:
     def __init__(self):
+        '''
+        This method initializes the config files used for model training
+        '''
         self.model_trainer_config = ModelTrainerConfig()
 
     def model_trainer(self):
+        '''
+        This method unger-go model training and selection.
+        Returns: Path of the model saved in pickle file format
+        '''
         try:
             logging.info("Models has been listed")
 
@@ -139,7 +142,7 @@ class ModelTrainer:
                 raise CustomException("No best model found")
 
             best_model = gs.best_estimator_
-            logging.info(f"Found best model:{best_model}")
+            logging.info(f"Found best model:{best_model} with score of {best_model_score}")
 
             logging.info("Now, saving the model in to pickle file")
             save_object(
@@ -153,21 +156,3 @@ class ModelTrainer:
         except Exception as e:
             raise CustomException(e,sys)
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-# transformation = DataTransformation()
-# transformation_result_set = transformation.transform_data(os.path.abspath("artifacts/train.csv"))
-#
-# print(transformation_result_set)
-# print(type(transformation_result_set))

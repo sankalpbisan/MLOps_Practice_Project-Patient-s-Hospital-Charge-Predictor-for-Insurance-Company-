@@ -1,8 +1,8 @@
 import os
 import sys
 import pandas as pd
-from src.logger import logging
 from src.utils import root_dir
+from src.logger import logging
 from src.exception import CustomException
 from sklearn.model_selection import train_test_split
 
@@ -27,6 +27,7 @@ class DataIngestion:
     def read_data(self):
         '''
         This method reads the data from existing csv file
+        Returns: Dataframe of csv data
         '''
         try:
             df = pd.read_csv(os.path.join(root_dir,'notebook','insurance.csv'))
