@@ -16,11 +16,6 @@ The webpage can be accessed by [clicking here](https://sankalp-mlops-practice-pr
 - [Installation](#installation)
 - [Usage](#usage)
 - [Model Performance](#model-performance)
-- [MLOps Pipeline](#mlops-pipeline)
-- [Contributing](#contributing)
-- [License](#license)
-- [Acknowledgments](#acknowledgments)
-- [Contact](#contact)
 
 ---
 
@@ -53,7 +48,7 @@ Before running the code, ensure you have set up the required environment. This i
     ```bash
     streamlit run app.py 
     ```
-    This will start the server. By default, it runs on `http://127.0.0.1:5000/`.
+    This will start the server. By default, it runs on `http://127.0.0.1:8501/`.
 
 * **Making Predictions:**
    
@@ -104,4 +99,5 @@ The performance of the hospital charges prediction model was evaluated using R-s
 
 The model was trained and evaluated on a dataset, initially data is splitted into train and test before preprocessing. Before training train data is splitted into train and validation set and performed a 10-fold cross-validation to ensure model robustness.
 
+---
 
